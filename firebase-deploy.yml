@@ -7,10 +7,13 @@ commands:
       token:
         type: string
         description: Firebase Deploy Token
+      project:
+        type: string
+        description: Firebase project, to specify other than the default
     steps:
       - run:
           name: Install Firebase Tools
           command: npm install --prefix=./firebase-deploy firebase-tools
       - run:
           name: Deploy to Firebase
-          command: ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >>
+          command: ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >> -P=<< parameters.project >>
