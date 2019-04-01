@@ -16,4 +16,4 @@ commands:
           command: npm install --prefix=./firebase-deploy firebase-tools
       - run:
           name: Deploy to Firebase
-          command: ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >> -P=<< parameters.project >>
+          command: ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >> --project=<< parameters.project >>
