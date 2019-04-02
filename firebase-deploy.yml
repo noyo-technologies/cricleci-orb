@@ -10,10 +10,18 @@ commands:
       project:
         type: string
         description: Firebase project, to specify other than the default
+      only:
+        type: string
+        description: For filling in the 'only' option for the deploy action
+        default: none
     steps:
       - run:
           name: Install Firebase Tools
           command: npm install --prefix=./firebase-deploy firebase-tools
       - run:
           name: Deploy to Firebase
-          command: ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >> --project=<< parameters.project >>
+          command: |
+              case << parameters.only >> in \
+              none) ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >> --project=<< parameters.project >> ;; \
+              *) ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >> --project=<< parameters.project >> --only=<< parameters.only >> ;; \
+              esac
