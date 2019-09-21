@@ -25,3 +25,28 @@ commands:
               none) ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >> --project=<< parameters.project >> ;; \
               *) ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >> --project=<< parameters.project >> --only=<< parameters.only >> ;; \
               esac
+  
+  
+  config_set:
+    description: Set a firebase config
+    parameters:
+      token:
+        type: string
+        description: Firebase Deploy Token
+      project:
+        type: string
+        description: Firebase project, to specify other than the default
+      key:
+        type: string
+        description: The key to set
+      value:
+        type: string
+        description: The value to set
+    steps:
+      - run:
+          name: Install Firebase Tools
+          command: npm install --prefix=./firebase-deploy firebase-tools
+      - run:
+          name: Deploy to Firebase
+          command: |
+            ./firebase-deploy/node_modules/.bin/firebase --token=<< parameters.token >> --project=<< parameters.project >> functions:config:set << parameters.key >>:<< parameters.value >>
