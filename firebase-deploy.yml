@@ -49,4 +49,4 @@ commands:
       - run:
           name: Deploy to Firebase
           command: |
-            ./firebase-deploy/node_modules/.bin/firebase --token=<< parameters.token >> --project=<< parameters.project >> functions:config:set << parameters.key >>:<< parameters.value >>
+            ./firebase-deploy/node_modules/.bin/firebase --token=<< parameters.token >> --project=<< parameters.project >> functions:config:set << parameters.key >>=<< parameters.value >>
